@@ -1,0 +1,577 @@
+C# ASSIGNMENT1
+
+01 Introduction to C# and Data Types
+Test your Knowledge 
+:
+1-Suitable data types for:
+Telephone number: int
+person’s age: short
+person’s height: short
+person’s gender: Enum
+person’s salary: int
+ book’s ISBN: int
+book’s shipping weight: int
+country’s population:int
+The number of stars in the universe: long
+The number of employees of small or medium businesses: int
+
+2-A value type holds it's value directly in memory(stack), whereas a reference type holds in memory the address or reference 
+of the location of it's value (in heap memory)
+Boxing: convert a value type to a reference type, like int to String
+Unboxing: convert a reference type to a value type
+
+3-Managed ressource in .Net are ressources like code or objects which are monitored by the garbage collector and released when 
+they are no more used.
+
+4- Garbage Collector is automatic ressource management in .Net:it ensures that objects that are no more anymore referenced are
+freed
+
+Playing with Console App
+
+using System;
+
+namespace ConsoleAppPlay
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Not my first program at all");
+
+            String color = "";
+            String astroSign = "";
+            String addressNumb;
+            Console.WriteLine("What is your favorite color?");
+            color = Console.ReadLine();
+
+            Console.WriteLine("Give in your astrology sign?");
+            astroSign= Console.ReadLine();
+
+            Console.WriteLine("State your street address number");
+             addressNumb = Console.ReadLine();
+
+            Console.WriteLine(" Your hacker name is {0}{1}{2}", color, astroSign, addressNumb);
+            
+
+        }
+    }
+}
+
+
+Practice number sizes and ranges
+1-
+            Console.WriteLine("Data Types - Number of bytes -  Min/Max values");
+            Console.WriteLine("sbytes     - 1 byte          -  -128/+128  ");
+            Console.WriteLine("bytes      - 1 byte          -    0/256  ");
+            Console.WriteLine("short      - 2 byte          -  -32768/32768 ");
+            Console.WriteLine("ushort     - 2 byte          -    0/65536 ");
+            Console.WriteLine("int        - 4 byte          -   -2^31/2^31 ");
+            Console.WriteLine("uint       - 4 byte          -    0/2^32 ");
+            Console.WriteLine("long       - 8 byte          -   -2^61/2^61");
+            Console.WriteLine("ulong      - 8 byte          -    0/2^62");
+            Console.WriteLine("float      - 4 byte          -    -3.4*10^38/3.4*10^38 ");
+            Console.WriteLine("double     - 8 byte          -   -2^61/2^61");
+            Console.WriteLine("decimal    - 16 byte         -   -1.7*10^308/1.7*10^308");
+
+
+2-Convert number of centuries:
+ //CONVERT CENTURIES
+            int numbCent;
+            Console.WriteLine("Enter the number of centuries");
+            string input = Console.ReadLine();
+            numbCent = Int32.Parse(input);
+           Console.WriteLine(numbCent+ " centuries ="+ numbCent*100+ " years = "+numbCent * 100*365 +" days = "+numbCent*100*365*24+" hours ="+ numbCent*100*365*24*60 +" minutes = "+(long)numbCent* 100 * 365 * 24 * 60 * 60+" seconds="+(long)numbCent * 100 * 365 * 24 * 60 * 60*1000000000 +" nanoseconds");
+
+
+Controlling Flow and Converting Types 
+
+1-What happens when you divide an int variable by 0? A DivideByZeroException
+2-What happens when you divide a double variable by 0? Infinite
+3-What happens when you overflow an int variable, that is, set it to a value beyond its 
+range? It receives the opposite sign
+4-x=y++ Assign y to x, then increment y; x=++y Increment y, then assign it to x
+5-break:The program gets out of the loop(or code block);the following statements won't be executed for any value.
+ continue:the program jump from the current to the next iteration;following statements will be executed starting at the next iteration
+6-Initialization, Termination, Increment
+None of them is required
+7- = Assignment like int b = 1;
+   == Equality check like if(b==1);
+8- Yes
+9-The underscore character repalces the dfault keyword, maning it should match anything if reached.
+10- IEnumerable
+
+Practice loops and operators
+1-FizzBuzz
+using System;
+namespace FizzBuzz
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            for (int i = 1; i <= 100; i++)
+            {
+                if (i % 3 == 0)
+                {
+                    Console.WriteLine();
+                    Console.Write("Fizz");
+                    if (i % 5 == 0)
+                        Console.Write("/ Buzz");
+                }
+                else if (i % 5 == 0)
+                {
+                    Console.WriteLine();
+                    Console.Write("Buzz");
+                }
+                else
+                {
+                    Console.WriteLine();
+                    Console.Write(i);
+                }
+            }
+            Console.Read();
+
+
+        }
+    }
+}
+
+
+//Add Comment Termination condition would never meet because of types differences between max and i:
+Infinite loop
+  
+            int max = 500;
+            for (byte i = 0; i< max; i++)
+            {
+                Console.WriteLine(i);
+              
+            }
+
+
+Guess the random number:
+
+ int correctNumber = new Random().Next(3) + 1;
+            Console.WriteLine("Guess the numer");
+            string input = Console.ReadLine();
+             int guessedNumber = Int32.Parse(input);
+            Console.WriteLine("correctNumber = " + correctNumber);
+            Console.WriteLine("guessedNumber = "+ guessedNumber);
+            {
+                if ((guessedNumber >= 1) && (guessedNumber < correctNumber)) Console.WriteLine("low");
+               else if ((guessedNumber <= 3) && (guessedNumber > correctNumber)) Console.WriteLine("high");
+               else if (guessedNumber == correctNumber) Console.WriteLine("get the correct answer");
+                else  Console.WriteLine("Out of range");
+            }
+
+
+2- //PRINT PYRAMID
+            int height=5,width = 9;
+            int mid = width / 2;
+            int left =  mid;
+            int right = mid;
+            int i = 0; 
+            while((left>=0) && (right < width) && (i < height))
+                {
+                for (int j = 0; j < left;j++) Console.Write(" ");
+                for(int j=left;j<right+1; j++) Console.Write("*");
+                for(int j=right+1;j<height; j++) Console.Write(" ");
+                Console.WriteLine();
+                left = left - 1;
+                right = right + 1;
+                i++;
+            }
+
+
+3- Handled above(generate random number)
+
+4-  DateTime date = new DateTime(01 / 08 / 1994);//12:00:00 AM;
+            //DateTime bDate= 01.08.1994;2/9/2022 12:00:00 AM
+            int days = (DateTime.Today-date).Days;
+            Console.WriteLine(((TimeSpan)(DateTime.Today - date)).Days);
+            int daysToNextAnniversary = 10000 - (days % 10000);
+            int monthsToNextAnniversary = daysToNextAnniversary / 30;
+            DateTime dateToNext10000 = DateTime.Today.Date + (DateTime.Month)monthsToNextAnniversary;
+
+
+5- //Greeting for the time of day
+            DateTime DateTime1 = DateTime.Today;
+            DateTime DateTime2 = DateTime.Now;
+            int hoursDiff = (DateTime2.Hour - DateTime1.Hour);
+            Console.WriteLine(hoursDiff);
+            if((hoursDiff <6)&&(hoursDiff>0) ) Console.WriteLine("Good Night");
+            else if((hoursDiff >= 6) && (hoursDiff < 12)) Console.WriteLine("Good Morning");
+            else if ((hoursDiff >= 12) && (hoursDiff < 18)) Console.WriteLine("Good Afternoon");
+            else  Console.WriteLine("Good Evening");
+
+
+6-//Prints the result of counting up to 24
+            for (int i = 0; i <= 24; i++) Console.Write(i);
+            Console.WriteLine();
+            for (int j = 0; j <= 24; j = j + 2) {
+                    Console.Write(j);
+                }
+            Console.WriteLine();
+            for (int k=0;k<=24; k=k+3) Console.Write(k); Console.WriteLine();
+            for (int l=0;l<=24; l=l+4) Console.Write(l); Console.WriteLine();
+
+
+02  Arrays and Strings
+
+Test your Knowledge
+
+1-Strings for unmutable chain of characters like usernames and passwords
+StringBuilder where it will be necessary to modify the chain of characters like in a method
+
+2-base class for all arrays in C#: class Array
+
+3-Sort-Algorithms: bubble/insertion/merge/quick sort, 
+
+4- Array.Length
+
+5- No
+
+6-CopyTo copies into a destination array that already exist and can specify an index where to insert while Clone creates a new array 
+with the copied elements and returns it
+
+
+Practice Arrays
+1-Copying an Array
+int[] A = { 1, 3, 6, 9, 12, 15, 18, 21, 24, 27 };
+            int[] B = new int[A.Length];
+            for(int i=0; i<A.Length; i++)
+            {
+                B[i] = A[i];
+            }
+
+            Console.Write("Elements of A: ");
+            int j=0;
+            while ( j < A.Length)
+            {
+                Console.Write(A[j]);
+                j++;
+                Console.Write(" ");
+            }
+            Console.WriteLine();
+            Console.Write("Elements of B: ");
+            for (int k = 0; k < B.Length; k++) { 
+                Console.Write(B[k]);
+                Console.Write(" ");
+            }
+
+     //Most frequent number in a given sequence
+        public static int[] mergeSort(int[] arr)
+        {
+            int[] left;
+            int[] right;
+            int[] result = new int[arr.Length];
+            if (arr.Length <= 1) return arr;
+            int midpoint = arr.Length / 2;
+
+            left = new int[midpoint];
+            if (arr.Length % 2 == 0)
+                right = new int[midpoint];
+            else right = new int[midpoint + 1];
+
+
+            for (int i = 0; i < midpoint; i++)
+                left[i] = arr[i];
+            int j = 0;
+            while ((midpoint + j) < arr.Length)
+            {
+                right[j] = arr[midpoint + j];
+                j++;
+            }
+
+            left = mergeSort(left);
+            right = mergeSort(right);
+            result = merge(left, right);
+            return result;
+        }
+        public static int[] merge(int[] left, int[] right)
+        {
+            int i = 0;
+            int j = 0;
+            int k = 0;
+            int[] result = new int[left.Length + right.Length];
+            while ((i < left.Length) || (j < right.Length))
+            {
+                if ((i < left.Length) && (j < right.Length))
+                {
+                    if (left[i] < right[j])
+                    {
+                        result[k] = left[i];
+                        i++;
+                    }
+                    else
+                    {
+                        result[k] = right[j];
+                        j++;
+                    }
+                    k++;
+                }
+
+                else if (i < left.Length)
+                {
+                    result[k] = left[i];
+                    i++;
+                    k++;
+                }
+
+                else
+                {
+                    result[k] = right[j];
+                    j++;
+                    k++;
+                }
+            }
+            return result;
+        }
+
+        //int[] sortedArr = mergeSort(A);
+        static String biggestSeq(int[] sortedArr)
+        {
+            StringBuilder storedSeq = new StringBuilder();
+            storedSeq.Append("dummies");
+            int count = 0;
+            for(int i=0; i < sortedArr.Length; i++)
+            {
+                count++;
+                if( (i+1)>=sortedArr.Length || ((sortedArr[i]!=sortedArr[i+1]) && (count>Convert.ToInt32(storedSeq[storedSeq.Length-1])  ) ))
+                {
+                    storedSeq.Append(sortedArr[i]);
+                    storedSeq.Append(count);
+                    count = 0;
+                }
+            }
+            string str = storedSeq.ToString();
+            return str.Substring(str.Length - 2);
+         
+        }
+
+
+2- //User manages a list of elements
+            List<string> groceryList = new List<string>();
+            groceryList[0] = "Cabbage";
+            groceryList[1] = "Pepper";
+            groceryList[2] = "Tomatoes";
+            groceryList[3] = "Eggplant";
+            groceryList[4] =  "Broccoli";  // "Zuchini"
+            Console.WriteLine("Enter command (+ item, - item, or -- to clear)):");
+            string input=Console.ReadLine();
+            string name = null;
+            if (input.Length > 2) 
+             name= input.Substring(2,input.Length-2);
+            //for (int i = 2; i < input.Length ; i++) { name[i - 2] = input[i]; }
+
+            if (input[0] == '-') {
+                if (input[1] == ' ') groceryList.Remove(name);
+                else if (input[1] == '-') groceryList = null;
+            }
+            else if (input[0] == '+') groceryList.Add(name);
+            for (int i = 0; i < groceryList.Count; i++)
+                Console.WriteLine(groceryList[i]);
+
+
+3-Prime numbers in range
+static int[] intFindPrimesInRange(int startNum, int endNum)
+        {
+            int numb = startNum;
+            int[] Primes = null;
+            int j = 0;
+            bool[] isPrime = new bool[endNum - startNum + 1];
+            for (int l = 0; l < isPrime.Length; l++) isPrime[l] = true;
+            while (numb <= endNum)
+            {
+                for (int i = 2; i < endNum; i++)
+                    if (numb % i == 0) isPrime[numb] = false;
+            }
+            for (int k = startNum; k < startNum + isPrime.Length; k++)
+                if (isPrime[k] == true) Primes[k - startNum] = k;
+            return Primes;
+        }
+
+
+5-//Longest sequence of equal elements
+            int[] array= { 2, 1, 1, 2, 3, 3, 2, 2, 2, 1 };
+            int count = 0;
+            StringBuilder str = new StringBuilder();
+            Dictionary<char,int> KV = new Dictionary<char,int>();
+            //for (int i = 0; i < array.Length; i++) ind2[i] = 0;
+            int i = 0;
+            for ( i = 0; i < array.Length-1 ; i++) { 
+                count++;
+                if ((i + 1 > array.Length) || array[i] != array[i + 1]) {
+                str = str.Append(array[i]);
+                str = str.Append(count);
+                    KV.Add((char)array[i], count);
+                count = 0;
+            }
+            }
+            Console.WriteLine(str);
+            int max = KV.Values.Max();
+            char c = KV.Keys(max);
+            for (int j = 0; j < max; j++) Console.WriteLine(c + " ");
+
+
+ 7- Most frequent number in a given sequence
+        public static int[] mergeSort(int[] arr)
+        {
+            int[] left;
+            int[] right;
+            int[] result = new int[arr.Length];
+            if (arr.Length <= 1) return arr;
+            int midpoint = arr.Length / 2;
+
+            left = new int[midpoint];
+            if (arr.Length % 2 == 0)
+                right = new int[midpoint];
+            else right = new int[midpoint + 1];
+
+
+            for (int i = 0; i < midpoint; i++)
+                left[i] = arr[i];
+            int j = 0;
+            while ((midpoint + j) < arr.Length)
+            {
+                right[j] = arr[midpoint + j];
+                j++;
+            }
+
+            left = mergeSort(left);
+            right = mergeSort(right);
+            result = merge(left, right);
+            return result;
+        }
+        public static int[] merge(int[] left, int[] right)
+        {
+            int i = 0;
+            int j = 0;
+            int k = 0;
+            int[] result = new int[left.Length + right.Length];
+            while ((i < left.Length) || (j < right.Length))
+            {
+                if ((i < left.Length) && (j < right.Length))
+                {
+                    if (left[i] < right[j])
+                    {
+                        result[k] = left[i];
+                        i++;
+                    }
+                    else
+                    {
+                        result[k] = right[j];
+                        j++;
+                    }
+                    k++;
+                }
+
+                else if (i < left.Length)
+                {
+                    result[k] = left[i];
+                    i++;
+                    k++;
+                }
+
+                else
+                {
+                    result[k] = right[j];
+                    j++;
+                    k++;
+                }
+            }
+            return result;
+        }
+
+        //int[] sortedArr = mergeSort(A);
+        static String biggestSeq(int[] sortedArr)
+        {
+            StringBuilder storedSeq = new StringBuilder();
+            storedSeq.Append("dummies");
+            int count = 0;
+            for(int i=0; i < sortedArr.Length; i++)
+            {
+                count++;
+                if( (i+1)>=sortedArr.Length || ((sortedArr[i]!=sortedArr[i+1]) && (count>Convert.ToInt32(storedSeq[storedSeq.Length-1])  ) ))
+                {
+                    storedSeq.Append(sortedArr[i]);
+                    storedSeq.Append(count);
+                    count = 0;
+                }
+            }
+            string str = storedSeq.ToString();
+            return str.Substring(str.Length - 2);
+         
+        }
+
+
+Practice Strings
+1-
+            String str1 = "24tvcoi92";
+            for (int i = str1.Length - 1; i >= 0; i--) Console.Write(str1[i]);
+              
+            char[] str2 =new char[str1.Length];
+            for (int k = 0; k < str1.Length; k++) { str2[k] = str1[k]; }
+            str2.Reverse();
+            str1 = str2.ToString(); Console.Write(str1);
+
+
+2-   reverses the words in a given sentence
+
+     string ReverseStrings(string str)
+        {
+            StringBuilder answer = new StringBuilder();
+            string[] words = str.Split('.', ' ');
+
+            for (int position = words.Length - 1; position >= 0; position--)
+            {
+                answer.Append(words[position]);
+                answer.Append(' ');
+            }
+
+            return answer.ToString();
+        }
+
+
+3- //Extracts from a given text all  palindromes
+        static string ExtractPalind(string str)
+        {
+            StringBuilder answer = new StringBuilder();
+            string[] words = str.Split('.', ' ','!',',','?');
+
+            static bool isPalindrome(string word)
+            {
+                    int i = 0, j = word.Length - 1;
+                    while (i < j)
+                    {
+                        if (word[i++] != word[j--])
+                            return false;
+                    }
+                    return true;
+            }
+
+            for (int j = 0; j < words.Length; j++)
+                {
+                    if (isPalindrome(words[j]) && words[j]!=" ")
+                    {
+                        answer = answer.Append(words[j]);
+                        answer = answer.Append(", ");
+                    }
+                }
+                return answer.ToString();
+         }
+
+
+4-//Parses an URL given in format
+        static void ParseURL(string url)
+        {
+            const string quote = "\"";
+            StringBuilder answer = new StringBuilder();
+            string[] parts = url.Split(':', '/');
+            int k = 0;
+             while(parts[k] != "") {
+                Console.WriteLine("[protocol] = " + "\"" + parts[0] + quote  );
+                Console.WriteLine("[server] =  " + quote + parts[3] + quote);
+                Console.WriteLine("[ressource] = " + "\"" + parts[4] + "\"");
+            }
+
+           
