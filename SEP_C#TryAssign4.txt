@@ -1,0 +1,176 @@
+                                     SEP Assignment4 Generics
+
+1-Generic problem address:
+we want to write a method that will be implemented the same for different types without repeating it for each type
+1st approach:object  --> lost of type unsafety, unwanted boxing.
+2nd best approach Generic: allows to define a method but defer the specification of type until the method is declared 
+and called
+
+2-List<string> = new List<string>
+ensure using System.Collections added.
+
+3-Two: TKey, TValue
+
+4-True
+
+5- List.Add
+
+6-List.Remove,
+
+7-In the class declaration:[Access modifier][return type][class name] <T>
+
+8-False
+
+9-True
+
+10-False
+
+
+
+Practice working with Generics
+1-  Create a custom Stack class  MyStack<T
+
+public class MyStack<T> 
+    {
+        int top;         
+        List<T> stackList = new List<T>(); 
+        MyStack()
+        {          
+            top = -1;
+        }
+        int Count()
+        {
+            return stackList.Count;
+        }
+        T Pop()
+        {
+            T element;
+            if (top == -1)
+            {
+                Console.WriteLine("Stack is empty");
+                return default(T);
+            }
+
+            else
+            {
+                element = stackList[top];
+                stackList[top] = default(T);
+                top--;
+                return element;
+            }
+        }
+        void push( T element)
+        {    
+                stackList.Add(element);
+                top++;
+        }
+    
+    }
+
+2-Create a Generic List data structure  MyList<T>
+ internal class T
+    {
+        List<T> MyList = new List<T>();
+
+        void Add(T element) { MyList.Add(element); }
+        T Remove(int index)
+        {
+            return MyList.RemoveAt(index) ;
+        }
+        bool Contains(T element)
+        {
+            return MyList.Contains(element);
+        }
+        void Clear()
+        {
+            MyList.Clear();
+        }
+        void InsertAt(T element, int index)
+        {
+            MyList.Insert(index, element);
+        }
+        void DeleteAt(int index)
+        {
+            MyList.RemoveAt(index);
+        }
+        T Find(int index)
+        {
+            return MyList[index];
+        }
+    }
+
+
+3-GenericRepository<T> class that implements IRepository<T> interface 
+
+ public interface IRepository<T> where <T> : class
+    {
+        void Add(T Entity);
+        void Remove(T Entity);
+        void Save(T Entity, int Id);
+        IEnumerable<T> GetAll();
+        T GetByID(int Id);
+    }
+
+    public class GenericRepository<T> : IRepository<T>
+    {
+        List<T> anyList = new List<T>();
+        public void Add(T Entity)
+        {
+            anyList.Add( Entity);
+        }
+
+        public IEnumerable<T> GetAll()
+        {
+           return anyList.ToArray();
+        }
+
+        public T GetByID(int Id)
+        {
+            return anyList[Id];
+        }
+
+        public void Remove(T Entity )
+        {
+            anyList.Remove( Entity);
+        }
+        public void Save( public interface IRepository<T> where <T> : class
+    {
+        void Add(T Entity);
+        void Remove(T Entity);
+        void Save(T Entity, int Id);
+        IEnumerable<T> GetAll();
+        T GetByID(int Id);
+    }
+    public class GenericRepository<T> : IRepository<T>
+    {
+        List<T> anyList = new List<T>();
+        public void Add(T Entity)
+        {
+            anyList.Add( Entity);
+        }
+
+        public IEnumerable<T> GetAll()
+        {
+           return anyList.ToArray();
+        }
+
+        public T GetByID(int Id)
+        {
+            return anyList[Id];
+        }
+
+        public void Remove(T Entity )
+        {
+            anyList.Remove( Entity);
+        }
+
+        public void Save(T Entity, int Id)
+        {
+            anyList.Insert(Id, Entity);
+        }
+
+        {
+            anyList.Insert(Id, Entity);
+        }
+    }
+
