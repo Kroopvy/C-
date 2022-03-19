@@ -1,0 +1,302 @@
+                                             SEP_ASSIGNMENT 3
+
+1-private internal --> access from within the class or assembly
+  protected internal  -->  access from within child class or assembly
+  public internal   --->   access from everywhere or within assembly
+  private protected  -->   access from within the class or child class
+  public protected  -->   access from everywhere or child class
+  public private  --->   access from everywhere or within the class
+
+2-static, const, and readonly keywords
+static : belongs to the class itself, not to an instance of the class
+const: does not change within it's scope
+readonly: we can not modify it(set a new value) 
+
+3-Create an instance of a class while initializing it's member fields
+
+4-Create a part or remaining of a class elsewhere like in a separate file so that all the 
+parts work together for the class
+
+5-tuple: set of odered elements
+
+6- record keyword lets define objects as immutable so that they show value type behaviour
+
+7-overloading:create method with same name but different signatur
+overriding:method with same name in parent class gets specific implementation in child class using 
+keyword override
+
+8-field:by default private, displays attributes/featres ob objects of a class
+property:method that helps specify accesssor(getter/setter) for a field
+
+9-by not giving it in the constructor
+
+10-interface:class that provides methods for functionalities each class implementing that interface must use(contract)
+different from abstract class by having no field,no instance constructor,support multiple inheritance,by default astract methods only
+
+11-public
+
+12-True
+
+13-True
+
+14-True
+
+15-False
+
+16-True
+
+17-True
+
+18-True
+
+19-False
+
+20-False
+
+21-True
+
+22-False
+
+23-True
+
+
+
+WORKING WITH METHODS
+1-static int[] GenerateNumbers()
+        {
+            int length;
+            string input = null;
+            Console.WriteLine("Give in the length: ");
+            input = Console.ReadLine();
+            length = Convert.ToInt32(input);
+            int[] A = new int[length];
+            for (int k = 0; k < length; k++)
+            {
+                Console.WriteLine("Give in next number: ");
+                string inp = Console.ReadLine();
+                A[k] = Convert.ToInt32(inp);
+            }
+            return A;
+        }
+        static int[] ReverseNumbers(int[] A)
+        {
+            int[] B = new int[A.Length];
+            for (int i = 0; i < A.Length; i++)
+            {
+                B[i] = A[A.Length - 1 - i];
+            }
+            return B;
+        }
+        static void PrintNumbers(int[] A)
+        {
+            for (int j = 0; j < A.Length; j++)
+            {
+                Console.Write(A[j] + ", ");
+            }
+        }
+
+
+2-nth Fibonacci number
+ static int fib(int n)
+        {
+            int[] A = new int[n];
+            A[0] = 1;
+            A[1] = 1;
+            for(int j = 2; j < n; j++)
+            {
+                A[j] = A[j - 2] + A[j - 1];
+            }
+            return A[n-1];
+         
+        }
+
+
+Designing and Building Classes using object-oriented principles
+
+1-6
+     interface IPersonService<TEntity> where TEntity : class
+    {
+        public int CalculateAge(DateTime DateOfBirth);
+        //decimal CalculateSalary(double HoursOfWork, decimal HourlyRate);
+
+    }
+    public abstract class Person : IPersonService<Person>
+    {
+        private List<string> _Addresses;
+
+        public List<string> Addresses
+        {
+            get
+            {
+
+                if (Addresses == null)
+                {
+                    _Addresses = new List<string>();
+                    return _Addresses;
+                }
+                return _Addresses;
+            }
+            private set
+            {
+                _Addresses = value;
+            }
+        }
+        public int Firstname { get; set; }
+        public int Lastname { get; set; }
+        public DateTime DateOfBirth { get; set; } 
+        public double HoursOfWork { get; set; }
+        public int HourlyRate { get; set; }
+        
+         
+        protected  abstract void DoesHomework();
+        protected abstract void DoesHisJob();
+        public int CalculateAge(DateTime DateOfBirth)
+        {
+            return (DateTime.Now.Year - DateOfBirth.Year);
+        }
+
+        protected virtual decimal CalculateSalary()
+        {
+            decimal salary= (decimal) this.HoursOfWork * this.HourlyRate;
+            return (salary > 0) ? salary : 0;
+        }
+    }
+
+    public class Student: Person
+    {
+        public int StudentID { get; set; }
+        public int Section { get; set; }
+        public int Major { get; set; }
+        public List<Course> Courses;
+        protected  override void DoesHomework() { 
+            Console.WriteLine(base.Firstname+ "learns the lessons");}
+        protected  override void DoesHisJob()
+        {
+            Console.WriteLine(base.Firstname + "attends class");
+        }
+        private double CalculateGPA()
+        {
+            double TotalGrade = 0.0;
+            for(int i = 0; i < Courses.Count; i++)
+            {
+                TotalGrade = (Grade) Enum.Parse(int, Courses[i].grade,true);
+            }
+            return TotalGrade / Courses.Count;
+        }
+
+    }
+    public class Instructor : Person
+    {
+        public Department Dept { get; set; }
+        bool isHeadOfdepartment { get; set; }
+        public DateTime JoinDate { get; set; }
+        public decimal YearlyBonus { get; set; }
+        protected override void DoesHomework()
+        {
+            Console.WriteLine("Pr " + base.Lastname + "correct the papers");
+        }
+        protected override void DoesHisJob()
+        {
+            Console.WriteLine("Pr " + base.Lastname + "teaches the lesson");
+        }
+
+        protected override decimal CalculateSalary()
+        {
+            int YearsOfExp = (int)(DateTime.Now.Year - JoinDate.Year);
+            decimal salary = (decimal)base.HoursOfWork * HourlyRate + YearsOfExp * YearlyBonus;
+            return (salary > 0) ? salary : 0;
+        }
+    }
+        public class Course
+        {
+            public int CourseID { get; set; }
+            public Grade grade { get; set; }
+            private List<Student> _Students;
+            public List<Student> Students
+            {
+                get
+                {
+                    return Students;
+                }
+                private set
+                {
+                    _Students = value;
+                }
+            }
+        }
+        public class Department
+        {
+            public Instructor DeptHead { get; set; }
+            public List<Course> DeptCourses;
+            decimal SchoolYearBudget;
+            public IEnumerable <Instructor> Staff;
+        }
+        public enum Grade {F,D,C,B,A };
+    }
+
+7-Try creating the two classes Color and Ball
+//Try creating the two classes Color and Ball
+    public class Color
+    {
+        private int red;
+        private int green;
+        private int blue;
+        private int transparency=255;
+        public int Red { get; set; }
+        public int Green { get; set; }
+        public int Blue { get; set; }
+        public int Transparency { get; set; }
+
+        public Color(int r, int g, int b, int t)
+        {
+            this.blue = b; this.green = g; this.red = r; this.transparency = t;
+        }
+        public Color(int r, int g, int b)
+        {
+            this.blue = b; this.green = g; this.red = r;
+        }
+        public double GrayScale()
+        {
+
+            return (this.red + this.green + this.blue) / 3;
+
+        }
+    }
+
+    public class Ball
+    {
+        public double Size { get; set; }
+        public Color BallColor{ get; set; }
+        public int ThrowCount { get; set; }
+        public Ball(double s, int r, int g, int b)
+        {
+            this.BallColor = new Color(r, g, b);
+            this.Size = s; this.BallColor.Red = r; this.BallColor.Green = g; this.BallColor.Blue = b;
+        }
+        public void Pop () { this.Size = 0; }
+        public void Throw()
+        {
+            if(this.Size !=0)
+             this.ThrowCount++;
+        }
+
+    }
+}
+   
+
+In Main Method:
+            Ball Ball1 = new Ball(2.5, 70, 80, 105);
+            Ball Ball2 = new Ball(2.0, 100, 100, 55);
+            Ball Ball3 = new Ball(1.5, 105, 100, 50);
+            Ball1.Throw();
+            Ball2.Throw();
+            Ball3.Throw();
+            Ball3.Throw();
+            Ball1.Pop();
+            Ball2.Pop();
+            Ball3.Pop();
+            Ball2.Throw();
+            Ball3.Throw();
+            Console.WriteLine(Ball1.ThrowCount);
+            Console.WriteLine(Ball2.ThrowCount);
+            Console.WriteLine(Ball3.ThrowCount);
